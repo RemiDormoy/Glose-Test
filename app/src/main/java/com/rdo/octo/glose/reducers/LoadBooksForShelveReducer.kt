@@ -36,7 +36,12 @@ class LoadBooksForShelveReducer(
         data class BookResponse(
             val id: String,
             val title: String,
-            val image: String?
+            val image: String?,
+            val authors: Author?
+        )
+
+        data class Author(
+            val name: String
         )
     }
 
@@ -50,7 +55,8 @@ class LoadBooksForShelveReducer(
             Book(
                 id = bookResponse.id,
                 name = bookResponse.title,
-                imageUrl = bookResponse.image
+                imageUrl = bookResponse.image,
+                authorName = bookResponse.authors?.name
             )
         }
         return state.copy(shelvesBookIdMap = state.shelvesBookIdMap.plus(action.id to books))
