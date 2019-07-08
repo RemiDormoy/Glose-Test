@@ -16,7 +16,14 @@ class LoadBookshelvesRepository (private val service: Service) {
 
     data class ResponseObject(
         val slug: String,
-        val title: String
+        val title: String,
+        val user: User
+    )
+
+    data class User(
+        val image: String,
+        val username: String,
+        val name: String
     )
 
     companion object {
@@ -31,7 +38,13 @@ class LoadBookshelvesRepository (private val service: Service) {
 
     fun getBookshelves(): List<BookShelve> {
         return service.getShelves().execute().body()?.map {
-            BookShelve(it.slug, it.title)
+            BookShelve(
+                name = it.slug,
+                description = it.title,
+                authorName = it.user.name,
+                authorUserName = it.user.username,
+                authorPictureUrl = it.user.image
+            )
         } ?: throw IllegalStateException("shelves list empty")
     }
 }

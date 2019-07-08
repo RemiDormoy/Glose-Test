@@ -29,5 +29,8 @@ class LoadBookshelvesReducer(private val repository: LoadBookshelvesRepository) 
 
 data class BookShelve(
     val name: String,
-    val description: String
+    val description: String,
+    val authorName: String,
+    val authorUserName: String,
+    val authorPictureUrl: String
 )
