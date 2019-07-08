@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rdo.octo.glose.actions.LoadBooksForShelveAction
 import com.rdo.octo.glose.actions.LoadBookshelvesAction
+import com.rdo.octo.glose.entities.Book
+import com.rdo.octo.glose.entities.BookShelve
 import com.rdo.octo.glose.state.GloseState
 import com.rdo.octo.glose.store.GloseStore
 import io.reactivex.Flowable
@@ -31,10 +34,20 @@ class MainActivity : AppCompatActivity() {
         store.dispatch(LoadBookshelvesAction)
     }
 
-    private fun displayShelves(it: GloseState) {
-        adapter.setShelves(it.bookShelves)
+    private fun displayShelves(state: GloseState) {
+        val viewModels = state.bookShelves.map {
+            val books = state.shelvesBookIdMap[it.id]
+            if (books == null) store.dispatch(LoadBooksForShelveAction(it.id))
+            ShelveViewModel(it, books ?: emptyList())
+        }
+        adapter.setShelves(viewModels)
     }
 }
+
+data class ShelveViewModel(
+    val bookShelve: BookShelve,
+    val books: List<Book>
+)
 
 class MainViewModel : StoreViewModel<GloseState, GloseStore>(GloseStore(GloseState.INSTANCE))
 

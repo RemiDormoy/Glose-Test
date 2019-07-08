@@ -1,6 +1,6 @@
 package com.rdo.octo.glose.repositories
 
-import com.rdo.octo.glose.reducers.BookShelve
+import com.rdo.octo.glose.entities.BookShelve
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,6 +15,7 @@ class LoadBookshelvesRepository (private val service: Service) {
     }
 
     data class ResponseObject(
+        val id: String,
         val slug: String,
         val title: String,
         val user: User
@@ -39,6 +40,7 @@ class LoadBookshelvesRepository (private val service: Service) {
     fun getBookshelves(): List<BookShelve> {
         return service.getShelves().execute().body()?.map {
             BookShelve(
+                id = it.id,
                 name = it.slug,
                 description = it.title,
                 authorName = it.user.name,
