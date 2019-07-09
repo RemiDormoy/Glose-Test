@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         val viewModels = state.bookShelves.map {
             val books = state.shelvesBookIdMap[it.id]
             if (books == null) store.dispatch(LoadBooksForShelveAction(it.id))
-            ShelveViewModel(it, books ?: emptyList())
+            ShelveViewModel(it, books)
         }
         adapter.setShelves(viewModels)
     }
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
 data class ShelveViewModel(
     val bookShelve: BookShelve,
-    val books: List<Book>
+    val books: List<Book>?
 )
 
 class MainViewModel : StoreViewModel<GloseState, GloseStore>(GloseStore(GloseState.INSTANCE))

@@ -40,7 +40,12 @@ class LoadBookDetailRepository(private val service: BookDetailService) {
             val id: String,
             val title: String,
             val image: String?,
-            val authors: List<Author>?
+            val authors: List<Author>?,
+            val price: Price?
+        )
+
+        data class Price(
+            val amount: Double
         )
 
         data class Author(
@@ -55,6 +60,7 @@ class LoadBookDetailRepository(private val service: BookDetailService) {
             id = response.id,
             name = response.title,
             imageUrl = response.image,
+            price = response.price?.amount,
             authorName = response.authors?.joinToString(", ") { author -> author.name }
         )
     }

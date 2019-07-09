@@ -4,5 +4,6 @@ data class Book(
     val id: String,
     val name: String,
     val imageUrl: String?,
-    val authorName: String?
+    val authorName: String?,
+    val price: Double?
 )

@@ -2,12 +2,15 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
     android:layout_margin="8dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="#EEEEEE"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/bookImageView"
@@ -15,14 +18,42 @@
             android:layout_height="160dp"
             android:scaleType="centerCrop"/>
 
-        <TextView
-            android:id="@+id/bookTitleTextView"
-            android:layout_width="match_parent"
-            android:padding="4dp"
-            android:layout_height="wrap_content"
-            android:lines="3"
-            android:gravity="center"
-            android:layout_gravity="center_horizontal|bottom"/>
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/bookTitleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:gravity="center"
+                android:lines="3"
+                android:padding="4dp" />
+
+            <ProgressBar
+                android:id="@+id/bookProgresssBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/authorTextView"
+                android:layout_width="match_parent"
+                android:padding="4dp"
+                android:lines="3"
+                android:gravity="center"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/priceTextView"
+                android:layout_width="match_parent"
+                android:padding="4dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
