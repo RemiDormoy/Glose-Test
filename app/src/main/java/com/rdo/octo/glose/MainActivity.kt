@@ -11,6 +11,7 @@ import com.rdo.octo.glose.entities.BookShelve
 import com.rdo.octo.glose.state.GloseState
 import com.rdo.octo.glose.store.GloseStore
 import io.reactivex.Flowable
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import me.tatarka.redux.android.lifecycle.StoreViewModel
@@ -51,8 +52,8 @@ data class ShelveViewModel(
 
 class MainViewModel : StoreViewModel<GloseState, GloseStore>(GloseStore(GloseState.INSTANCE))
 
-fun <S> Flowable<S>.subscribeOnMainThread(action: (S) -> Unit) {
-    this.subscribe {
+fun <S> Flowable<S>.subscribeOnMainThread(action: (S) -> Unit): Disposable {
+    return this.subscribe {
         GlobalScope.launch(Dispatchers.Main) {
             action(it)
         }

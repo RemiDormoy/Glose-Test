@@ -20,6 +20,16 @@ class GloseStore(state: GloseState) : SimpleStore<GloseState>(state) {
         }
     }
 
+    override fun setState(newState: GloseState) {
+        if (state != null) {
+            val finalState =
+                newState.copy(shelvesBookIdMap = newState.shelvesBookIdMap.plus(state.shelvesBookIdMap))
+            super.setState(finalState)
+        } else {
+            super.setState(newState)
+        }
+    }
+
     fun subscribeTo(action: (GloseState) -> Unit) {
         FlowableAdapter.flowable(this).subscribeOnMainThread {
             action(it)

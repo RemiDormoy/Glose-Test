@@ -1,6 +1,9 @@
 package com.rdo.octo.glose.repositories
 
+import com.rdo.octo.glose.GloseApplication
 import com.rdo.octo.glose.entities.BookShelve
+import com.readystatesoftware.chuck.ChuckInterceptor
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -31,6 +34,9 @@ class LoadBookshelvesRepository (private val service: Service) {
         private fun getRetrofit() = Retrofit.Builder()
             .baseUrl("https://api.glose.com")
             .addConverterFactory(GsonConverterFactory.create())
+            .client(OkHttpClient.Builder()
+                .addInterceptor(ChuckInterceptor(GloseApplication.CONTEXT))
+                .build())
             .build()
 
         fun getInstance() = LoadBookshelvesRepository(getRetrofit().create(Service::class.java))
