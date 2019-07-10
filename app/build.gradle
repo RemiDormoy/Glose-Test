@@ -41,7 +41,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
 
     // RxJava2 Dependencies
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.6'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
     // Redux
@@ -51,7 +51,7 @@ dependencies {
     implementation "me.tatarka.redux:redux-rx2:0.10"
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    testImplementation "org.mockito:mockito-core:3.0.0"
+    testImplementation 'org.assertj:assertj-core:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 }
